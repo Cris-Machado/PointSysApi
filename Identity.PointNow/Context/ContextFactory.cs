@@ -9,7 +9,7 @@ namespace Point.API.Identity.Context
     {
         public IdentityContext CreateDbContext(string[] args)
         {
-            var conn = "Server=(localdb)\\mssqllocaldb;Database=PointDb;";
+            var conn = "Server=(localdb)\\mssqllocaldb;Database=IPointDb;";
 
             var optionsBuilder = new DbContextOptionsBuilder<IdentityContext>();
 

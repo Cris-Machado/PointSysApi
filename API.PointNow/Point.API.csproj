@@ -11,7 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Extensions\" />
+    <ProjectReference Include="..\Identity.PointNow\Point.Identity.csproj" />
+    <ProjectReference Include="..\IoC.PointNow\Point.IoC.csproj" />
   </ItemGroup>
 
 </Project>
