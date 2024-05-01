@@ -1,4 +1,4 @@
-﻿namespace Identity.PointNow
+﻿namespace Identity.Point
 {
     public class Class1
     {
