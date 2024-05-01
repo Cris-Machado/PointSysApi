@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Point.API.Identity.Context;
 
-namespace PointNow.API.Identity.Context
+namespace Point.API.Identity.Context
 {
     public class ContextFactory : IDesignTimeDbContextFactory<IdentityContext>
     {
         public IdentityContext CreateDbContext(string[] args)
         {
-            var conn = "Server=(localdb)\\mssqllocaldb;Database=PointNowDb;";
+            var conn = "Server=(localdb)\\mssqllocaldb;Database=PointDb;";
 
             var optionsBuilder = new DbContextOptionsBuilder<IdentityContext>();
 
