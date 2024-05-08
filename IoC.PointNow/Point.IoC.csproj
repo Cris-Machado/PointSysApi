@@ -6,4 +6,15 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.22" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="6.0.22" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Data.PointNow\Point.Data.csproj" />
+    <ProjectReference Include="..\Domain.PointNow\Point.Domain.csproj" />
+    <ProjectReference Include="..\Identity.PointNow\Point.Identity.csproj" />
+  </ItemGroup>
+
 </Project>
