@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Point.API.Data.Context;
 
@@ -11,9 +12,10 @@ using Point.API.Data.Context;
 namespace Point.Data.Migrations
 {
     [DbContext(typeof(PointContext))]
-    partial class PointContextModelSnapshot : ModelSnapshot
+    [Migration("20240504013339_CreatingDataBase")]
+    partial class CreatingDataBase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

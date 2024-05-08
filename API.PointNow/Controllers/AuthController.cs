@@ -7,6 +7,7 @@ using Point.API.Identity.Dtos;
 using Point.API.Identity.Entitites;
 using Point.API.Presentation.Controllers.Base;
 using System.Text;
+using System.Security.Claims;
 
 
 namespace Point.API.Presentation.Controllers
@@ -43,7 +44,8 @@ namespace Point.API.Presentation.Controllers
                 if (appUser is null)
                     return BadRequest("Usuário não encontrado");
 
-                var token = GenerateJwtToken().ToString();
+                var claims = await _userManager.GetClaimsAsync(appUser);
+                var token = GenerateJwtToken(model.Email, appUser, claims).ToString();
 
                 if (string.IsNullOrEmpty(token)) return BadRequest("Erro ao gerar o token.");
 
@@ -64,21 +66,25 @@ namespace Point.API.Presentation.Controllers
         #endregion
 
         #region ## Private Methods
-        private object GenerateJwtToken()
+        private object GenerateJwtToken(string email, IdentityUser user, IList<Claim> claims)
         {
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("POINT_XYZ_XPTO"));
+            claims.Add(new Claim(JwtRegisteredClaimNames.Sub, email));
+            claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
+            claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("MAINPOWER_POINT_XYZ_XPTO"));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var expires = DateTime.Now.AddDays(Convert.ToDouble(1));
 
             var token = new JwtSecurityToken(
                 "http://127.0.0.1",
                 "http://127.0.0.1",
+                claims,
                 expires: expires,
                 signingCredentials: creds
             );
 
-            var teste = new JwtSecurityTokenHandler().WriteToken(token);
-            return teste;
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
         #endregion

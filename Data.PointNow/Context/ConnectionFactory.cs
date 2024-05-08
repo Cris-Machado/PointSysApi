@@ -8,7 +8,7 @@ namespace Point.API.Data.Context
     {
         public PointContext CreateDbContext(string[] args)
         {
-            var conn = "Server=(localdb)\\mssqllocaldb;Database=IPointDb;";
+            var conn = "Server=(localdb)\\mssqllocaldb;Database=PointSysDb;";
             var optionsBuilder = new DbContextOptionsBuilder<PointContext>();
 
             optionsBuilder.UseSqlServer(conn);

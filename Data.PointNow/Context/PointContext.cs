@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Point.API.Data.Interfaces;
 using Point.API.Domain.Services;
 using System.Data.Common;
@@ -24,6 +25,7 @@ namespace Point.API.Data.Context
 
         #region DbSets
         public DbSet<User> Users { get; set; }
+        public DbSet<UserPoint> Points{ get; set; }
         #endregion
 
         #region Override
@@ -31,6 +33,14 @@ namespace Point.API.Data.Context
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<User>().ToTable("AspNetUsers", "Identity");
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            var config = new ConfigurationBuilder()
+                .Build();
+
+            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=PointSysDb;", x => x.MigrationsHistoryTable("__MigrationHistory", "Identity"));
         }
         #endregion
     }

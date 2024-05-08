@@ -68,6 +68,8 @@ namespace Point.API.IoC
                     cfg.SaveToken = true;
                     cfg.TokenValidationParameters = new TokenValidationParameters
                     {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
                         ValidIssuer = configuration["JwtIssuer"],
                         ValidAudience = configuration["JwtIssuer"],
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtKey"])),
@@ -78,12 +80,13 @@ namespace Point.API.IoC
 
             #region Services
             services.AddScoped<IUsersService, UsersService>();
+            services.AddScoped<IUsersPointService, UsersPointService>();
             #endregion
 
             #region Repositories
             services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
             services.AddScoped<IUsersRepository, UsersRepository>();
-            //services.AddScoped<ILogger, Logger>();
+            services.AddScoped<IUsersPointRepository, UsersPointRepository>();
             #endregion
         }
     }
