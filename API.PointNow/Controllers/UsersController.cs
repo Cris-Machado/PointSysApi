@@ -22,14 +22,6 @@ namespace Point.API.Presentation.Controllers
 
         #region Methods
 
-        [HttpGet]
-        [AllowAnonymous]
-        public async Task<ActionResult> GetAll()
-        {
-            var result = await _userService.FindAllAsync();
-            return Ok(result);
-        }
-
         [HttpPost]
         [AllowAnonymous]
         public async Task<ActionResult> InsertUser(User model)
